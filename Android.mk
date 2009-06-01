@@ -34,5 +34,5 @@ include $(BUILD_SHARED_LIBRARY)
 include $(addsuffix /Android.mk, $(addprefix $(LOCAL_PATH)/, \
 			modules/gralloc \
 			tests \
+			modules/lights \
 		))
-		
