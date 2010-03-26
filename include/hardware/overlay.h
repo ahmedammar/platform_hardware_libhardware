@@ -73,6 +73,10 @@ enum {
     OVERLAY_DITHER        = 3,
     /* transformation applied (this is a superset of COPYBIT_ROTATION_DEG) */
     OVERLAY_TRANSFORM    = 4,
+    /* zorder setting for multi-instance */
+    OVERLAY_ZORDER    = 5,
+    /* overlay data setting */
+    OVERLAY_BUFNUM = 128,
 };
 
 /* enable/disable value setParameter() */
@@ -210,7 +214,12 @@ struct overlay_data_device_t {
     void* (*getBufferAddress)(struct overlay_data_device_t *dev,
             overlay_buffer_t buffer);
 
+
     int (*getBufferCount)(struct overlay_data_device_t *dev);
+
+    /* returns the physical address of a given buffer if supported, NULL otherwise. */
+    unsigned int (*getBufferAddressPhy)(struct overlay_data_device_t *dev,
+            overlay_buffer_t buffer);
 };
 
 
