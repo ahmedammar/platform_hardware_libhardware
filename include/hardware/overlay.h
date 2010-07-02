@@ -65,6 +65,14 @@ enum {
     OVERLAY_TRANSFORM_ROT_270   = HAL_TRANSFORM_ROT_270
 };
 
+/* values for setParameter(OVERLAY_MODE) */
+enum {
+    /* Normal mode for calling the queue and dequeue API */
+    OVERLAY_NORAML_MODE    = 0,
+    /* Push mode for calling queue API with direct private buffer handle*/
+    OVERLAY_PUSH_MODE    = 1,
+};
+
 /* names for setParameter() */
 enum {
     /* rotation of the source image in degrees (0 to 359) */
@@ -77,6 +85,7 @@ enum {
     OVERLAY_ZORDER    = 5,
     /* overlay data setting */
     OVERLAY_BUFNUM = 128,
+    OVERLAY_MODE,
 };
 
 /* enable/disable value setParameter() */
