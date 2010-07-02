@@ -285,7 +285,7 @@ typedef struct framebuffer_device_t {
      * return -EINVAL if width or height <=0, or if left or top < 0 
      */
     int (*setUpdateRect)(struct framebuffer_device_t* window,
-            int left, int top, int width, int height);
+            int left, int top, int width, int height, int updatemode);
     
     /*
      * Post <buffer> to the display (display it on the screen)
