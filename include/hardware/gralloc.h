@@ -286,11 +286,11 @@ typedef struct framebuffer_device_t {
      */
 #ifdef FSL_EPDC_FB
     int (*setUpdateRect)(struct framebuffer_device_t* window,
-            int left, int top, int width, int height, int updatemode);
+             int *left, int *top, int *width, int *height, int *updatemode, int count);
 #else
     int (*setUpdateRect)(struct framebuffer_device_t* window,
             int left, int top, int width, int height);
-#endif    
+#endif
     /*
      * Post <buffer> to the display (display it on the screen)
      * The buffer must have been allocated with the 
