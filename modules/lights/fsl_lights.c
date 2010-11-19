@@ -23,8 +23,11 @@
 #include <stdlib.h>
 #include <cutils/log.h>
 #include <cutils/atomic.h>
+#include <cutils/properties.h>
 
 #define MAX_BRIGHTNESS 255
+#define DEF_BACKLIGHT_DEV "pwm-backlight"
+#define DEF_BACKLIGHT_PATH "/sys/class/backlight/"
 
 /*****************************************************************************/
 struct lights_module_t {
@@ -50,6 +53,7 @@ const struct lights_module_t HAL_MODULE_INFO_SYM = {
     }
 };
 
+static char max_path[256], path[256];
 // ****************************************************************************
 // module
 // ****************************************************************************
@@ -60,20 +64,14 @@ static int set_light_backlight(struct light_device_t* dev,
     unsigned int color = state->color;
     unsigned int brightness, max_brightness;
     FILE *file;
-    char *path;
 
     brightness = ((77*((color>>16)&0x00ff)) + (150*((color>>8)&0x00ff)) +
                  (29*(color&0x00ff))) >> 8;
     LOGV("set_light, get brightness=%d", brightness);
 
-    path = getenv("MAX_BACKLIGHT_PATH");
-    if (!path) {
-        LOGE("MAX_BACKLIGHT_PATH not found\n");
-        return result;
-    }
-    file = fopen(path, "r");
+    file = fopen(max_path, "r");
     if (!file) {
-        LOGE("can not open file %s\n", path);
+        LOGE("can not open file %s\n", max_path);
 	return result;
     }
     fread(&max_brightness, 1, 3, file);
@@ -84,11 +82,6 @@ static int set_light_backlight(struct light_device_t* dev,
     LOGV("set_light, max_brightness=%d, target brightness=%d",
         max_brightness, brightness);
 
-    path = getenv("BACKLIGHT_PATH");
-    if (!path) {
-        LOGE("BACKLIGHT_PATH not found\n");
-        return result;
-    }
     file = fopen(path, "w");
     if (!file) {
         LOGE("can not open file %s\n", path);
@@ -117,6 +110,8 @@ static int lights_device_open(const struct hw_module_t* module,
     LOGV("lights_device_open\n");
     if (!strcmp(name, LIGHT_ID_BACKLIGHT)) {
         struct light_device_t *dev;
+        char value[PROPERTY_VALUE_MAX];
+
         dev = malloc(sizeof(*dev));
 
         /* initialize our state here */
@@ -131,6 +126,17 @@ static int lights_device_open(const struct hw_module_t* module,
         dev->set_light = set_light_backlight;
 
 	*device = &dev->common;
+
+        property_get("hw.backlight.dev", value, DEF_BACKLIGHT_DEV);
+        strcpy(path, DEF_BACKLIGHT_PATH);
+        strcat(path, value);
+        strcpy(max_path, path);
+        strcat(max_path, "/max_brightness");
+        strcat(path, "/brightness");
+
+        LOGI("max backlight file is %s\n", max_path);
+        LOGI("backlight brightness file is %s\n", path);
+
         status = 0;
     }
 
