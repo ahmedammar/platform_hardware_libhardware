@@ -48,6 +48,7 @@ enum {
     COPYBIT_FORMAT_RGBA_4444    = HAL_PIXEL_FORMAT_RGBA_4444,
     COPYBIT_FORMAT_YCbCr_422_SP = 0x10,
     COPYBIT_FORMAT_YCrCb_420_SP = 0x11,
+    COPYBIT_FORMAT_YCbCr_420_SP = HAL_PIXEL_FORMAT_YCbCr_420_SP,
 };
 
 /* name for copybit_set_parameter */
