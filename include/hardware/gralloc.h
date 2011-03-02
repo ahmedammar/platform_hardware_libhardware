@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+/* Copyright 2010-2011 Freescale Semiconductor Inc. */
+
 
 #ifndef ANDROID_GRALLOC_INTERFACE_H
 #define ANDROID_GRALLOC_INTERFACE_H
@@ -320,8 +322,15 @@ typedef struct framebuffer_device_t {
 
     int (*compositionComplete)(struct framebuffer_device_t* dev);
 
-
+#ifdef SECOND_DISPLAY_SUPPORT
+    /*
+    * This is used to set the rotation for second display in dual disp
+    */
+    int (*setSecRotation)(struct framebuffer_device_t* dev,int secRotation);
+    void* reserved_proc[7];
+#else
     void* reserved_proc[8];
+#endif
 
 } framebuffer_device_t;
 
