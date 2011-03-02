@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+/* Copyright 2010-2011 Freescale Semiconductor Inc. */
 
 #ifndef ANDROID_FB_INTERFACE_H
 #define ANDROID_FB_INTERFACE_H
@@ -141,7 +141,15 @@ typedef struct framebuffer_device_t {
      */
     int (*enableScreen)(struct framebuffer_device_t* dev, int enable);
 
+#ifdef SECOND_DISPLAY_SUPPORT
+    /*
+     * This is used to set the rotation for second display in dual disp
+     */
+    int (*setSecRotation)(struct framebuffer_device_t* dev,int secRotation);
+    void* reserved_proc[5];
+#else
     void* reserved_proc[6];
+#endif
 
 } framebuffer_device_t;
 
