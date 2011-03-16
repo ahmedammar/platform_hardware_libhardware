@@ -62,7 +62,7 @@ static int set_light_backlight(struct light_device_t* dev,
 {
     int result = -1;
     unsigned int color = state->color;
-    unsigned int brightness, max_brightness;
+    unsigned int brightness = 0, max_brightness = 0;
     FILE *file;
 
     brightness = ((77*((color>>16)&0x00ff)) + (150*((color>>8)&0x00ff)) +
