@@ -82,7 +82,20 @@ enum {
     /* buffer should be displayed full-screen on an external display when
      * possible
      */
-    GRALLOC_USAGE_EXTERNAL_DISP         = 0x00002000,
+    GRALLOC_USAGE_EXTERNAL_DISP   = 0x00002000,
+    
+    /*in mx5x, there is only one ipu, so only one overlay device is fb2 and it can be combined with disp0 or disp1.
+     *when in mx6x, there are two ipu, so the first overlay device can be combined with disp0 or disp1,
+     *and the second overlay device can be combined with disp2 and disp3.
+    */
+    GRALLOC_USAGE_HWC_OVERLAY     = GRALLOC_USAGE_EXTERNAL_DISP,  //the video or camera need overlay for hardware accelerate.
+		GRALLOC_USAGE_HWC_OVERLAY_DISP0 = 0x00100000,  //the overlay combined with and output to disp0.
+		GRALLOC_USAGE_HWC_OVERLAY_DISP1 = 0x00200000,  //the overlay combined with and output to disp1.
+		GRALLOC_USAGE_HWC_OVERLAY_DISP2 = 0x00400000,  //the overlay combined with and output to disp2.
+		GRALLOC_USAGE_HWC_OVERLAY_DISP3 = 0x00800000,  //the overlay combined with and output to disp3.
+		GRALLOC_USAGE_HWC_DISP1 = 0x01000000,          //Specify the output is DISP1
+		GRALLOC_USAGE_HWC_DISP2 = 0x02000000,          //Specify the output is DISP2
+		GRALLOC_USAGE_HWC_DISP3 = 0x04000000,          //Specify the output is DISP3
 
     /* Must have a hardware-protected path to external display sink for
      * this buffer.  If a hardware-protected path is not available, then
