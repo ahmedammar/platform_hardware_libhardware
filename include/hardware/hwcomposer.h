@@ -305,7 +305,9 @@ typedef struct hwc_composer_device {
     int (*set)(struct hwc_composer_device *dev,
                 hwc_display_t dpy,
                 hwc_surface_t sur,
-                hwc_layer_list_t* list);
+                hwc_layer_list_t* list,
+                char refresh,
+                char vRefresh);
     /*
      * This hook is OPTIONAL.
      *
