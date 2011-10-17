@@ -302,12 +302,11 @@ typedef struct hwc_composer_device {
      *    Another code for non EGL errors.
      *
      */
+    int (*setUpdateMode) (struct hwc_composer_device *dev, char refresh, char vRefresh);
     int (*set)(struct hwc_composer_device *dev,
                 hwc_display_t dpy,
                 hwc_surface_t sur,
-                hwc_layer_list_t* list,
-                char refresh,
-                char vRefresh);
+                hwc_layer_list_t* list);
     /*
      * This hook is OPTIONAL.
      *
