@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+/*Copyright 2009-2011 Freescale Semiconductor, Inc. All Rights Reserved.*/
 
 #ifndef ANDROID_GRALLOC_INTERFACE_H
 #define ANDROID_GRALLOC_INTERFACE_H
@@ -38,6 +39,7 @@ __BEGIN_DECLS
  * The id of this module
  */
 #define GRALLOC_HARDWARE_MODULE_ID "gralloc"
+#define GRALLOC_VIV_HARDWARE_MODULE_ID "gralloc_viv"
 
 /**
  * Name of the graphics device to open

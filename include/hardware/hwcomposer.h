@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+/*Copyright 2009-2011 Freescale Semiconductor, Inc. All Rights Reserved.*/
+
 #ifndef ANDROID_INCLUDE_HARDWARE_HWCOMPOSER_H
 #define ANDROID_INCLUDE_HARDWARE_HWCOMPOSER_H
 
